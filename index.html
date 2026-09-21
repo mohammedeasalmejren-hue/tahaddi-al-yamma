@@ -1,0 +1,100 @@
+<!doctype html>
+<html lang="ar" dir="rtl">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
+  <meta name="theme-color" content="#101b36">
+  <meta name="apple-mobile-web-app-capable" content="yes">
+  <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+  <meta name="apple-mobile-web-app-title" content="تحدّي اليمعة">
+  <meta name="description" content="لعبة أسئلة وفرق ونقاط لليمعة، تشتغل على تلفون واحد.">
+  <title>تحدّي اليمعة — لعبة الديوانية</title>
+  <style>
+    :root{font-family:-apple-system,BlinkMacSystemFont,"Segoe UI",Tahoma,Arial,sans-serif;color-scheme:dark;--bg:#0b1225;--panel:#14213d;--panel2:#1b2c50;--text:#f7f7ff;--muted:#b4bfd9;--gold:#f8c963;--bright:#ffdf94;--line:#344667;--good:#67e8aa;--bad:#ff9b9e}
+    *{box-sizing:border-box}body{margin:0;min-height:100vh;background:radial-gradient(circle at 50% -20%,#253b66 0,transparent 60%),var(--bg);color:var(--text);padding:env(safe-area-inset-top) 0 env(safe-area-inset-bottom)}button,input,select{font:inherit}button{cursor:pointer;touch-action:manipulation}button:disabled{opacity:.38;cursor:not-allowed}button:focus-visible,input:focus-visible,select:focus-visible{outline:3px solid var(--gold);outline-offset:2px}h1,h2,h3,p{margin-top:0}h1{font-size:clamp(1.8rem,7vw,3rem);margin-bottom:9px}h2{font-size:1.55rem}.app{width:min(1020px,100%);margin:auto;padding:17px}.top{display:flex;justify-content:space-between;gap:8px;align-items:center;flex-wrap:wrap}.brand{font-weight:900;color:var(--gold);font-size:1.15rem;letter-spacing:-.4px}.eyebrow{color:var(--gold);font-weight:800;font-size:.78rem;letter-spacing:.07em}.sub{color:var(--muted);line-height:1.8}.panel{background:linear-gradient(150deg,rgba(30,46,80,.97),rgba(15,25,47,.97));border:1px solid var(--line);border-radius:21px;padding:19px;margin-top:15px;box-shadow:0 12px 35px #0002}.intro{margin-top:23px}.intro h1 span{color:var(--gold)}.hero-orn{width:76px;height:76px;display:grid;place-items:center;background:#f8c9631c;border:1px solid #f8c96377;border-radius:20px;font-size:2.4rem;margin:14px 0}.formgrid{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:13px}.field label{display:block;color:var(--muted);margin-bottom:7px;font-size:.92rem}.field input,.field select{width:100%;padding:13px 11px;background:#0e1930;border:1px solid #415476;border-radius:12px;color:var(--text);min-height:49px}.field input::placeholder{color:#8897b7}.actions{display:flex;gap:10px;flex-wrap:wrap;margin-top:17px}.btn{border:0;border-radius:13px;padding:12px 17px;font-weight:800;min-height:47px;background:var(--gold);color:#152039}.btn.secondary{background:#2c3f66;color:var(--text);border:1px solid #526584}.btn.ghost{color:var(--muted);background:transparent;border:1px solid var(--line)}.btn.danger{background:#633541;color:#ffebef}.btn.wide{width:100%}.micro{font-size:.82rem;color:var(--muted);line-height:1.65}.scoreboard{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:10px;margin:14px 0}.team{border:1px solid #415476;background:var(--panel);border-radius:15px;padding:13px;min-width:0}.team.active{border-color:var(--gold);box-shadow:inset 0 0 0 1px #f8c96355}.team .name{font-weight:800;overflow-wrap:anywhere;font-size:.9rem}.team .score{font-size:clamp(1.7rem,7vw,2.3rem);font-variant-numeric:tabular-nums;font-weight:900;color:var(--bright);margin:7px 0}.team .meta{font-size:.76rem;color:var(--muted)}.sectionhead{display:flex;justify-content:space-between;align-items:center;gap:10px;flex-wrap:wrap}.status{display:inline-block;background:#f8c96320;color:var(--bright);padding:7px 11px;border-radius:999px;font-weight:700;font-size:.8rem}.board{display:grid;grid-template-columns:repeat(6,minmax(0,1fr));gap:8px;direction:rtl;overflow-x:auto}.category{background:#293a62;color:#f3f5ff;border:1px solid #47608a;border-radius:11px;min-height:80px;display:grid;place-items:center;text-align:center;padding:7px 3px;font-weight:800;font-size:.84rem}.question-tile{background:#233d72;color:var(--gold);border:1px solid #456ca4;border-radius:10px;min-height:61px;font-size:1.32rem;font-weight:900;font-variant-numeric:tabular-nums;padding:7px 3px}.question-tile:active:not(:disabled){transform:scale(.98)}.question-tile.used{background:#101b32;border-color:#25334d;color:#52617a;opacity:1}.board-wrap{overflow:auto;padding:2px 0}.result{padding:20px;text-align:center;background:#f8c96318;border:1px solid #f8c96366;border-radius:16px}.result strong{color:var(--gold);font-size:1.35rem}.progress{height:8px;background:#2b3b5b;border-radius:99px;overflow:hidden;margin:15px 0}.progress span{display:block;background:var(--gold);height:100%;transition:width .2s}.question-shell{max-width:740px;margin:auto}.question-text{font-weight:900;font-size:clamp(1.35rem,5vw,2.1rem);line-height:1.65;margin:20px 0}.timer{display:inline-flex;align-items:center;gap:10px;font-weight:900;font-size:1.5rem;color:var(--gold);background:#f8c96316;border:1px solid #f8c96366;padding:10px 16px;border-radius:14px;font-variant-numeric:tabular-nums}.timer.expired{color:var(--bad);border-color:var(--bad);background:#ff9b9e13}.answer{background:#0e2d37;border:1px solid #498b85;border-radius:16px;padding:17px;margin-top:17px}.answer .value{font-size:1.55rem;color:var(--good);font-weight:900;margin:8px 0}.hint{background:#40351f;border:1px solid #9c814a;color:#ffe4a3;border-radius:12px;padding:13px;margin-top:12px;line-height:1.7}.award-grid{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:9px;margin-top:12px}.notice{background:#1c2a46;border:1px solid #425678;border-radius:12px;padding:12px;color:var(--muted);line-height:1.8;font-size:.91rem}.footer{text-align:center;color:#8192b4;font-size:.75rem;margin:22px 0 8px}.rule{border:0;border-top:1px solid var(--line);margin:18px 0}.board-legend{color:var(--muted);font-size:.8rem;margin:7px 0 13px;line-height:1.7}.winnerlist{display:grid;gap:8px;margin-top:14px}.winner-row{display:flex;justify-content:space-between;gap:10px;align-items:center;background:#1d2e4e;padding:13px;border-radius:12px}.winner-row strong{color:var(--gold)}.sr-only{position:absolute!important;width:1px;height:1px;overflow:hidden;clip:rect(0,0,0,0);white-space:nowrap}
+    @media(min-width:740px){.app{padding:27px}.panel{padding:26px}.scoreboard{grid-template-columns:repeat(4,minmax(0,1fr))}.category{min-height:75px;font-size:1rem}.question-tile{min-height:78px;font-size:1.7rem}.award-grid{grid-template-columns:repeat(4,minmax(0,1fr))}}
+    @media(max-width:380px){.app{padding:10px}.panel{padding:13px}.board{gap:4px}.category{font-size:.7rem;min-height:74px}.question-tile{font-size:1rem;min-height:52px}.btn{padding:11px 12px}.team{padding:9px}}
+  </style>
+</head>
+<body>
+<main id="app" class="app" aria-live="polite"></main>
+<script>
+'use strict';
+const CATEGORIES=[
+ {name:'🇰🇼 الكويت',short:'الكويت',items:[
+  ['شنو العملة الرسمية في دولة الكويت؟','الدينار الكويتي','هي العملة اللي تستخدمها يومياً بالكويت.','يرمز لها عادةً بـ د.ك.'],
+  ['في أي سنة استقلت الكويت؟','1961','في بداية الستينات.','أُعلن الاستقلال في 19 يونيو 1961.'],
+  ['كم عدد محافظات الكويت؟','6 محافظات','أكثر من خمس وأقل من سبع.','العاصمة، حولي، الفروانية، الأحمدي، الجهراء، مبارك الكبير.'],
+  ['شنو أكبر جزيرة كويتية من حيث المساحة؟','بوبيان','اسمها يبدأ بحرف الباء.','تقع شمال شرقي الكويت.']
+ ]},
+ {name:'⚽ رياضة',short:'رياضة',items:[
+  ['كم لاعب من كل فريق يبدأ داخل الملعب بمباراة كرة القدم التقليدية؟','11 لاعباً','العدد يشمل حارس المرمى.','11 لاعباً لكل فريق عند البداية.'],
+  ['كم مدة شوطي كرة القدم الأصلية من دون وقت بدل ضائع أو إضافي؟','90 دقيقة','كل شوط 45 دقيقة.','45 + 45 = 90 دقيقة.'],
+  ['كم نقطة يحصل الفريق الفائز في نظام الدوري المعتاد لكرة القدم؟','3 نقاط','أكثر من نقطتين.','في نظام 3 نقاط للفوز ونقطة للتعادل.'],
+  ['شنو اسم الحركة اللي تبدأ فيها مباراة كرة القدم من دائرة المنتصف؟','ركلة البداية','تنفذ من منتصف الملعب.','تُستخدم كذلك لاستئناف اللعب بعد الهدف.']
+ ]},
+ {name:'🌍 جغرافيا',short:'جغرافيا',items:[
+  ['شنو عاصمة اليابان؟','طوكيو','مدينة فيها منطقتا شيبويا وشينجوكو.','طوكيو هي العاصمة اليابانية.'],
+  ['شنو أكبر دولة في العالم من حيث المساحة؟','روسيا','تمتد بين أوروبا وآسيا.','روسيا الأكبر من حيث المساحة الإجمالية.'],
+  ['شنو المحيط الواقع بين أفريقيا وأستراليا؟','المحيط الهندي','اسمه مرتبط بدولة آسيوية كبيرة.','المحيط الهندي يمتد بين أفريقيا وآسيا وأستراليا.'],
+  ['شنو المضيق اللي يفصل إسبانيا عن المغرب؟','مضيق جبل طارق','يربط الأطلسي بالبحر المتوسط.','يفصل جنوب إسبانيا عن شمال المغرب.']
+ ]},
+ {name:'🔬 علوم',short:'علوم',items:[
+  ['شنو الكوكب المعروف بالكوكب الأحمر؟','المريخ','الكوكب الرابع من الشمس.','لون سطحه مرتبط بأكاسيد الحديد.'],
+  ['شنو الغاز اللي تمتصه النباتات في البناء الضوئي؟','ثاني أكسيد الكربون','مو الأكسجين اللي تطلقه النباتات.','تستخدمه النباتات مع الماء والضوء لإنتاج السكريات.'],
+  ['شنو أكبر عضو في جسم الإنسان من حيث المساحة؟','الجلد','يغطي جسمك بالكامل.','الجلد هو أكبر عضو في الجسم.'],
+  ['شنو الرمز الكيميائي للحديد؟','Fe','حرفان، الأول F.','الرمز Fe مأخوذ من اسم الحديد باللاتينية Ferrum.']
+ ]},
+ {name:'🎮 أنمي',short:'أنمي',items:[
+  ['شنو اسم بطل ون بيس وقائد قبعة القش؟','مونكي دي لوفي','قدرته مرتبطة بالمطاط.','لوفي قائد قراصنة قبعة القش.'],
+  ['شنو اسم صديق غون من عائلة زولديك في هانتر؟','كيلوا','شعره فضي.','كيلوا زولديك من الشخصيات الرئيسية في هانتر × هانتر.'],
+  ['شنو اسم قرية ناروتو المعروفة بقرية الورق؟','كونوها','اسمها يبدأ بحرف الكاف.','كونوها هي القرية المخفية بين أوراق الشجر.'],
+  ['منو قائد جماعة العناكب في هانتر × هانتر؟','كرولو لوسيلفر','عنده كتاب مرتبط بقدرته.','كرولو قائد جماعة جيني ريودان، المعروفة بالعناكب.']
+ ]},
+ {name:'🧩 ألغاز',short:'ألغاز',items:[
+  ['كم شهر بالسنة الميلادية؟','12 شهراً','نفس عدد ساعات نصف اليوم.','تبدأ بيناير وتنتهي بديسمبر.'],
+  ['كم زاوية في المثلث؟','3 زوايا','اسم الشكل يلمّح للعدد.','المثلث له ثلاثة أضلاع وثلاث زوايا.'],
+  ['شنو الشي اللي كل ما أخذت منه كبر؟','الحفرة','تتعمّق كل ما شلت منها تراباً.','كل ما أزلت تراباً كبرت الحفرة.'],
+  ['عندك ثلاث تفاحات، وخذيت منها تفاحتين. جم تفاحة صارت عندك؟','تفاحتان','السؤال عن اللي أخذته، مو الباقي.','أنت أخذت تفاحتين؛ إذن معاك تفاحتان.']
+ ]}
+];
+const KEY='tahaddi-yamma-v1';
+const app=document.getElementById('app');
+let state=null;
+let draft={count:2,names:['الفريق الأول','الفريق الثاني','الفريق الثالث','الفريق الرابع'],duration:45};
+let ticker=null;
+function escapeHtml(s){return String(s).replace(/[&<>"']/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c]));}
+function save(){try{localStorage.setItem(KEY,JSON.stringify(state));}catch(err){console.warn('تعذر حفظ التقدم:',err);}}
+function load(){try{const x=JSON.parse(localStorage.getItem(KEY));if(x&&x.version===1&&Array.isArray(x.teams)&&x.teams.length>=2&&x.teams.length<=4&&Array.isArray(x.used)&&typeof x.duration==='number'){state=x;return;}}catch(err){console.warn('تعذر استرجاع التقدم:',err);}state=null;}
+function total(){return CATEGORIES.reduce((s,c)=>s+c.items.length,0)}
+function header(){return `<div class="top"><span class="brand">✦ تحدّي اليمعة</span><span class="eyebrow">لعبة الديوانية • النسخة 1.0</span></div>`;}
+function render(){clearInterval(ticker);if(!state){renderSetup();return;}if(state.current){renderQuestion();return;}renderBoard();}
+function renderSetup(){app.innerHTML=header()+`<section class="intro"><div class="hero-orn">🏆</div><p class="eyebrow">اللعبة جاهزة لليَمعة</p><h1>منو <span>أذكى فريق</span> بالديوانية؟</h1><p class="sub">24 سؤال • 6 فئات • نقاط وتلميحات • تلفون واحد • بدون حسابات</p></section><section class="panel"><h2>جهّزوا الفرق</h2><div class="formgrid"><div class="field"><label for="count">عدد الفرق</label><select id="count"><option value="2">فريقان</option><option value="3">3 فرق</option><option value="4">4 فرق</option></select></div><div class="field"><label for="duration">مدة السؤال</label><select id="duration"><option value="30">30 ثانية</option><option value="45">45 ثانية</option><option value="60">60 ثانية</option></select></div></div><div id="team-inputs" class="formgrid" style="margin-top:14px"></div><div class="actions"><button class="btn wide" id="start">ابدأ اللعبة ←</button></div><p class="micro">لكل فريق تلميحان في اللعبة كلها. المدير يختار السؤال ويقرر الفريق اللي يستحق النقاط. أي إجابة مكشوفة تنتهي باحتساب نقاط أو بدون نقاط.</p></section><p class="footer">تصميم أصلي للتجربة — لا توجد مشتريات ولا تسجيل دخول</p>`;
+ document.getElementById('count').value=String(draft.count);document.getElementById('duration').value=String(draft.duration);
+ const inputs=document.getElementById('team-inputs');
+ function names(){inputs.innerHTML=draft.names.slice(0,draft.count).map((n,i)=>`<div class="field"><label for="team-${i}">اسم الفريق ${i+1}</label><input id="team-${i}" maxlength="22" autocomplete="off" value="${escapeHtml(n)}" placeholder="الفريق ${i+1}"></div>`).join('');draft.names.slice(0,draft.count).forEach((_,i)=>document.getElementById('team-'+i).addEventListener('input',e=>draft.names[i]=e.target.value));}
+ document.getElementById('count').addEventListener('change',e=>{draft.count=Number(e.target.value);names();});document.getElementById('duration').addEventListener('change',e=>draft.duration=Number(e.target.value));
+ document.getElementById('start').addEventListener('click',()=>{state={version:1,teams:draft.names.slice(0,draft.count).map((name,i)=>({name:name.trim()||`الفريق ${i+1}`,score:0,hints:2})),duration:draft.duration,used:[],next:0,current:null};save();render();});names();}
+function scores(){return `<div class="scoreboard">${state.teams.map((t,i)=>`<div class="team ${i===state.next?'active':''}"><div class="name">${escapeHtml(t.name)} ${i===state.next?'👈':''}</div><div class="score">${t.score.toLocaleString('en-US')}</div><div class="meta">تلميحات باقية: ${t.hints}</div></div>`).join('')}</div>`;}
+function renderBoard(){const done=state.used.length;const max=total();const over=done===max;
+ let grid=CATEGORIES.map(c=>`<div class="category">${c.name}</div>`).join('');
+ for(let j=0;j<4;j++)for(let i=0;i<CATEGORIES.length;i++){const id=`${i}-${j}`;const used=state.used.includes(id);grid+=`<button type="button" class="question-tile ${used?'used':''}" ${used?'disabled':''} data-question="${id}" aria-label="${CATEGORIES[i].short} ${100*(j+1)} نقطة${used?'، مستخدم':''}">${used?'✓':100*(j+1)}</button>`;}
+ let winner='';if(over){const order=[...state.teams].sort((a,b)=>b.score-a.score);const top=order[0].score;const wins=order.filter(t=>t.score===top);winner=`<section class="panel"><div class="result">🎉<br><strong>${wins.length===1?'الفائز: '+escapeHtml(wins[0].name):'تعادل: '+wins.map(x=>escapeHtml(x.name)).join(' و ')}</strong><p class="sub" style="margin:10px 0 0">خلصت كل الأسئلة!</p></div><div class="winnerlist">${order.map(t=>`<div class="winner-row"><span>${escapeHtml(t.name)}</span><strong>${t.score.toLocaleString('en-US')}</strong></div>`).join('')}</div></section>`;}
+ app.innerHTML=header()+`<div class="sectionhead" style="margin-top:18px"><h2 style="margin:0">لوحة التحدّي</h2><span class="status">${done} / ${max} سؤال</span></div>${scores()}<div class="panel"><div class="sectionhead"><h3 style="margin:0">${over?'انتهت الجولة':'الدور على: '+escapeHtml(state.teams[state.next].name)}</h3><span class="eyebrow">اختاروا أي قيمة</span></div><div class="progress"><span style="width:${done/max*100}%"></span></div><p class="board-legend">الفريق صاحب الدور يختار السؤال. إذا فريق ثاني جاوب، تقدر تعطيه النقاط.</p><div class="board-wrap"><div class="board">${grid}</div></div></div>${winner}<div class="actions"><button class="btn secondary" id="new-game">لعبة جديدة ↻</button></div><p class="micro">التقدم محفوظ على هذا المتصفح والجهاز فقط. حذف بيانات Safari يمسح النتيجة.</p><p class="footer">تحدّي اليمعة • النسخة التجريبية</p>`;
+ app.querySelectorAll('[data-question]').forEach(b=>b.addEventListener('click',()=>openQuestion(b.dataset.question)));
+ document.getElementById('new-game').addEventListener('click',()=>{if(confirm('تبدأ لعبة جديدة؟ راح تنمسح نتيجة الجولة الحالية.')){state=null;save();render();}});
+}
+function openQuestion(id){if(state.used.includes(id)||state.current)return;const [c,q]=id.split('-').map(Number);if(!CATEGORIES[c]||!CATEGORIES[c].items[q])return;state.current={id,revealed:false,hintUsed:false,turn:state.next,end:Date.now()+state.duration*1000};save();render();}
+function remaining(){return Math.max(0,Math.ceil((state.current.end-Date.now())/1000));}
+function renderQuestion(){const q=state.current;const [c,j]=q.id.split('-').map(Number);const item=CATEGORIES[c].items[j];const t=state.teams[q.turn];const left=remaining();
+ app.innerHTML=header()+`<section class="question-shell"><div class="panel"><div class="sectionhead"><span class="status">${CATEGORIES[c].name}</span><span class="eyebrow">${(j+1)*100} نقطة</span></div><p class="sub" style="margin-top:13px">الدور على: <strong>${escapeHtml(t.name)}</strong></p><div class="timer ${left===0?'expired':''}" id="timer" role="timer" aria-label="الوقت المتبقي">⏱ <span id="time">${left}</span> <small style="font-size:.78rem">ثانية</small></div><div class="question-text">${escapeHtml(item[0])}</div>${q.hintUsed?`<div class="hint">💡 التلميح: ${escapeHtml(item[2])}</div>`:''}${q.revealed?`<div class="answer"><div class="eyebrow">الإجابة الصحيحة</div><div class="value">${escapeHtml(item[1])}</div><div class="micro">${escapeHtml(item[3])}</div></div><h3 style="margin:18px 0 5px">منو يستحق النقاط؟</h3><p class="micro">اختر الفريق اللي جاوب صح، أو أنهِ السؤال بدون نقاط.</p><div class="award-grid">${state.teams.map((team,i)=>`<button class="btn ${i===q.turn?'':'secondary'}" data-award="${i}">${escapeHtml(team.name)} +${(j+1)*100}</button>`).join('')}</div><div class="actions"><button class="btn ghost wide" id="no-points">ما حد جاوب — بدون نقاط</button></div>`:`<div class="actions"><button class="btn secondary" id="hint" ${q.hintUsed||t.hints===0?'disabled':''}>💡 تلميح (${t.hints} باقية)</button><button class="btn" id="reveal">اكشف الإجابة</button></div><div class="actions"><button class="btn ghost" id="cancel">رجوع بدون استخدام السؤال</button></div><p class="micro">المؤقت للمساعدة فقط، مو شرط تنتهي الجولة لما يصفر.</p>`}</div></section>`;
+ if(!q.revealed){const ti=document.getElementById('time');const tm=document.getElementById('timer');ticker=setInterval(()=>{if(!state||!state.current){clearInterval(ticker);return;}const rem=remaining();ti.textContent=String(rem);tm.classList.toggle('expired',rem===0);if(rem===0)clearInterval(ticker);},250);
+ document.getElementById('hint').addEventListener('click',()=>{if(q.hintUsed||t.hints<1)return;t.hints--;q.hintUsed=true;save();render();});document.getElementById('reveal').addEventListener('click',()=>{q.revealed=true;save();render();});document.getElementById('cancel').addEventListener('click',()=>{state.current=null;save();render();});
+ }else{app.querySelectorAll('[data-award]').forEach(b=>b.addEventListener('click',()=>finish(Number(b.dataset.award))));document.getElementById('no-points').addEventListener('click',()=>finish(null));}
+}
+function finish(teamIndex){if(!state||!state.current||!state.current.revealed)return;const q=state.current;const j=Number(q.id.split('-')[1]);if(teamIndex!==null&&(!Number.isInteger(teamIndex)||!state.teams[teamIndex]))return;if(teamIndex!==null)state.teams[teamIndex].score+=(j+1)*100;if(!state.used.includes(q.id))state.used.push(q.id);state.next=(q.turn+1)%state.teams.length;state.current=null;save();render();}
+load();render();
+if('serviceWorker' in navigator&&location.protocol==='https:'){window.addEventListener('load',()=>navigator.serviceWorker.register('./sw.js').catch(err=>console.warn('Offline not available:',err)));}
+</script>
+</body>
+</html>
