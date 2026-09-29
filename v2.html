@@ -1,0 +1,222 @@
+<!doctype html>
+<html lang="ar" dir="rtl">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
+<meta name="theme-color" content="#08111f">
+<meta name="apple-mobile-web-app-capable" content="yes">
+<meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+<meta name="apple-mobile-web-app-title" content="تحدّي اليمعة V2">
+<title>تحدّي اليمعة V2</title>
+<style>
+:root {
+  font-family:-apple-system,BlinkMacSystemFont,"Segoe UI",Tahoma,Arial,sans-serif;
+  color-scheme:dark; --bg:#07101d;--bg2:#0c1b31;--panel:#10233c;--panel2:#142c4b;
+  --text:#f7f9ff;--muted:#a8b5ca;--gold:#ffd166;--gold2:#ffb703;--line:#294467;
+  --good:#58d68d;--bad:#ff6b6b;--blue:#5aa9ff;--purple:#b58cff;
+}
+*{box-sizing:border-box}
+body{margin:0;min-height:100vh;background:
+radial-gradient(circle at 50% -15%,#23456f 0,transparent 45%),
+linear-gradient(180deg,var(--bg2),var(--bg));color:var(--text);
+padding:env(safe-area-inset-top) 0 env(safe-area-inset-bottom)}
+button,input,select{font:inherit}
+button{cursor:pointer;touch-action:manipulation}
+button:disabled{opacity:.35;cursor:not-allowed}
+.app{width:min(1100px,100%);margin:auto;padding:14px}
+.top{display:flex;justify-content:space-between;align-items:center;gap:10px;flex-wrap:wrap;margin:4px 0 12px}
+.brand{font-weight:950;font-size:1.1rem;color:var(--gold)}
+.badge{padding:6px 10px;border-radius:999px;background:#ffd16618;border:1px solid #ffd16655;color:var(--gold);font-weight:800;font-size:.78rem}
+.panel{background:linear-gradient(160deg,#132a47ee,#0c1a2fee);border:1px solid var(--line);
+border-radius:20px;padding:16px;box-shadow:0 15px 45px #0004;margin-top:12px}
+.hero{padding:18px 0}
+.hero h1{font-size:clamp(2rem,8vw,3.8rem);line-height:1.05;margin:7px 0}
+.hero h1 span{color:var(--gold)}
+.sub{color:var(--muted);line-height:1.8}
+.grid2{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:12px}
+.field label{display:block;color:var(--muted);font-size:.85rem;margin-bottom:6px}
+.field input,.field select{width:100%;min-height:48px;border-radius:12px;border:1px solid #36577f;
+background:#09182c;color:var(--text);padding:11px}
+.btn{border:0;border-radius:13px;padding:12px 15px;min-height:47px;font-weight:900;
+background:var(--gold);color:#142035}
+.btn.secondary{background:#183658;color:var(--text);border:1px solid #31577f}
+.btn.ghost{background:transparent;color:var(--muted);border:1px solid var(--line)}
+.btn.good{background:var(--good);color:#082015}
+.btn.bad{background:var(--bad);color:#2b0b0b}
+.btn.purple{background:var(--purple);color:#180b2d}
+.btn.wide{width:100%}
+.actions{display:flex;gap:9px;flex-wrap:wrap;margin-top:14px}
+.scoreboard{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:10px;margin:12px 0}
+.team{background:#0d2038;border:1px solid #2f5073;border-radius:16px;padding:12px;min-width:0}
+.team.active{border-color:var(--gold);box-shadow:inset 0 0 0 1px #ffd16655}
+.team .name{font-weight:900;overflow-wrap:anywhere}
+.team .score{font-size:1.8rem;color:var(--gold);font-weight:950;margin:5px 0}
+.assists{display:flex;gap:6px;flex-wrap:wrap}
+.assist-chip{font-size:.72rem;padding:5px 7px;border-radius:999px;border:1px solid #355a80;background:#102842}
+.assist-chip.used{opacity:.28;text-decoration:line-through}
+.board-wrap{overflow-x:auto;padding-bottom:5px}
+.board{display:grid;grid-template-columns:repeat(12,minmax(78px,1fr));gap:7px;min-width:980px}
+.cat{min-height:74px;border-radius:11px;background:#18375c;border:1px solid #37628d;
+display:grid;place-items:center;text-align:center;padding:6px;font-size:.78rem;font-weight:900}
+.tile{min-height:58px;border-radius:10px;border:1px solid #3b6794;background:#123867;
+color:var(--gold);font-size:1.15rem;font-weight:950}
+.tile.used{background:#0a1728;color:#425a73;border-color:#1a3046}
+.progress{height:7px;background:#17304f;border-radius:999px;overflow:hidden;margin:12px 0}
+.progress span{display:block;height:100%;background:linear-gradient(90deg,var(--gold2),var(--gold));transition:width .2s}
+.qwrap{max-width:760px;margin:auto}
+.qhead{display:flex;justify-content:space-between;gap:10px;align-items:center;flex-wrap:wrap}
+.timer{font-variant-numeric:tabular-nums;font-size:2rem;font-weight:950;color:var(--gold);
+display:inline-flex;gap:8px;align-items:center;padding:10px 15px;border-radius:14px;background:#ffd16612;border:1px solid #ffd16655}
+.timer.danger{color:var(--bad);border-color:#ff6b6b88;animation:pulse .75s infinite alternate}
+@keyframes pulse{to{transform:scale(1.035)}}
+.qtext{font-size:clamp(1.35rem,5vw,2rem);font-weight:950;line-height:1.65;margin:18px 0}
+.options{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:10px}
+.option{background:#102b49;border:1px solid #345c84;border-radius:13px;padding:14px;color:var(--text);font-weight:850;min-height:58px}
+.option.hidden-option{visibility:hidden}
+.option.selected{outline:3px solid var(--gold)}
+.visual{background:#071522;border:1px solid #294a6d;border-radius:16px;padding:13px;margin:8px 0 16px;display:grid;place-items:center}
+.visual svg{max-width:100%;height:auto}
+.answer{background:#0b342d;border:1px solid #2d8b76;border-radius:14px;padding:14px;margin-top:14px}
+.answer strong{color:var(--good);font-size:1.35rem}
+.fact{color:#bfe6dc;line-height:1.7;margin-top:6px}
+.helpbar{display:grid;grid-template-columns:repeat(3,1fr);gap:8px;margin-top:14px}
+.helpbtn{min-height:48px;border-radius:12px;border:1px solid #3c5270;background:#18283e;color:var(--text);font-weight:900}
+.helpbtn.used{opacity:.3}
+.notice{background:#1a2940;border:1px solid #3a5272;border-radius:12px;padding:11px;color:var(--muted);line-height:1.7}
+.steal{background:#401b1b;border:1px solid #8a3939;border-radius:14px;padding:13px;margin-top:13px;color:#ffd6d6}
+.result{text-align:center;padding:22px}
+.result .cup{font-size:4rem}
+.small{font-size:.78rem;color:var(--muted);line-height:1.6}
+.toast{position:fixed;left:50%;bottom:24px;transform:translateX(-50%);background:#07131fcc;
+border:1px solid #355373;color:#fff;padding:10px 14px;border-radius:12px;z-index:20;backdrop-filter:blur(8px)}
+@media(min-width:760px){.app{padding:24px}.panel{padding:22px}.scoreboard{grid-template-columns:repeat(4,minmax(0,1fr))}}
+@media(max-width:600px){.grid2,.options{grid-template-columns:1fr}.app{padding:10px}.panel{padding:13px}}
+</style>
+</head>
+<body>
+<main id="app" class="app"><section class="panel"><h2>تحدّي اليمعة V2</h2><p class="sub">إذا بقيت هذه الرسالة ولم تظهر شاشة إعداد الفرق، افتح الملف في Safari أو ارفعه على GitHub Pages لأن معاينة الملفات قد تمنع JavaScript.</p></section></main>
+<script>
+'use strict';
+const CATEGORIES = [{"name": "⚽ رياضة", "short": "رياضة", "qs": [{"value": 100, "type": "mcq", "q": "في كرة القدم، كم لاعب يبدأ المباراة داخل الملعب لكل فريق؟", "options": ["9", "10", "11", "12"], "answer": "11", "fact": "التشكيلة الأساسية تبدأ بـ11 لاعباً بينهم حارس المرمى."}, {"value": 200, "type": "image", "q": "شوف الرسم: شنو اسم الدائرة الموجودة بمنتصف ملعب كرة القدم؟", "visual": "pitch", "options": ["منطقة الجزاء", "دائرة المنتصف", "قوس الركنية", "منطقة المرمى"], "answer": "دائرة المنتصف", "fact": "تُستخدم دائرة المنتصف عند ركلة البداية لضمان ابتعاد لاعبي الخصم."}, {"value": 300, "type": "mcq", "q": "في كرة السلة، كم ثانية مدة الهجمة الواحدة في القواعد الدولية؟", "options": ["20", "24", "30", "35"], "answer": "24", "fact": "ساعة التسديد في كرة السلة الدولية 24 ثانية."}, {"value": 400, "type": "truefalse", "q": "في التنس، إذا كانت النتيجة 40-40 تسمى Deuce.", "answer": "صح", "fact": "بعد التعادل 40-40 يحتاج اللاعب نقطتين متتاليتين لحسم الشوط."}, {"value": 500, "type": "audio", "q": "اسمع التلميح الصوتي وحدد الرياضة المقصودة.", "audioText": "رياضة فيها إرسال، شوط، كسر إرسال، والنتيجة قد تصل إلى التعادل أربعين أربعين.", "options": ["الريشة", "التنس", "الاسكواش", "الطائرة"], "answer": "التنس", "fact": "مصطلحات الإرسال وDeuce وكسر الإرسال ترتبط بالتنس."}]}, {"name": "🎌 أنمي", "short": "أنمي", "qs": [{"value": 100, "type": "mcq", "q": "منو قائد قراصنة قبعة القش في ون بيس؟", "options": ["زورو", "لوفي", "سانجي", "شانكس"], "answer": "لوفي", "fact": "مونكي دي لوفي هو قائد طاقم قبعة القش."}, {"value": 200, "type": "mcq", "q": "شنو اسم قرية ناروتو الرئيسية؟", "options": ["كونوها", "سونا", "كيري", "كومو"], "answer": "كونوها", "fact": "كونوها هي القرية المخفية بين أوراق الشجر."}, {"value": 300, "type": "audio", "q": "اسمع الوصف: منو الشخصية؟", "audioText": "قاتل محترف من عائلة مشهورة، شعره فضي، وصديق غون الأقرب.", "options": ["كورابيكا", "كيلوا", "ليوريو", "هيسوكا"], "answer": "كيلوا", "fact": "كيلوا زولديك ينتمي لعائلة زولديك الشهيرة بالاغتيال."}, {"value": 400, "type": "mcq", "q": "في هانتر × هانتر، شنو اسم قائد جماعة العناكب؟", "options": ["فيتان", "كرولو", "فنكس", "نوبوناغا"], "answer": "كرولو", "fact": "كرولو لوسيلفر هو قائد جيني ريودان."}, {"value": 500, "type": "mcq", "q": "في دراغون بول، شنو اسم الاندماج الناتج باستخدام رقصة الاندماج بين غوكو وفيجيتا؟", "options": ["فيجيتو", "غوجيتا", "غوتينكس", "برولي"], "answer": "غوجيتا", "fact": "غوجيتا ينتج من رقصة الاندماج، بينما فيجيتو يرتبط بأقراط البوتارا."}]}, {"name": "🏺 تاريخ", "short": "تاريخ", "qs": [{"value": 100, "type": "mcq", "q": "في أي سنة استقلت الكويت؟", "options": ["1956", "1961", "1965", "1971"], "answer": "1961", "fact": "أُعلن استقلال الكويت في 19 يونيو 1961."}, {"value": 200, "type": "mcq", "q": "من هو القائد المسلم المرتبط بفتح القدس سنة 1187م؟", "options": ["صلاح الدين الأيوبي", "طارق بن زياد", "خالد بن الوليد", "عمرو بن العاص"], "answer": "صلاح الدين الأيوبي", "fact": "دخل صلاح الدين القدس بعد انتصاره في حطين سنة 1187م."}, {"value": 300, "type": "truefalse", "q": "سقطت القسطنطينية بيد العثمانيين سنة 1453م.", "answer": "صح", "fact": "قاد السلطان محمد الثاني فتح القسطنطينية عام 1453م."}, {"value": 400, "type": "mcq", "q": "أي حضارة بنت مدينة ماتشو بيتشو؟", "options": ["المايا", "الإنكا", "الأزتك", "الرومان"], "answer": "الإنكا", "fact": "ماتشو بيتشو موقع إنكا شهير في بيرو."}, {"value": 500, "type": "audio", "q": "اسمع التلميح وحدد الحدث التاريخي.", "audioText": "حدث وقع عام ألف وأربعمئة وثلاثة وخمسين، وأنهى الإمبراطورية البيزنطية.", "options": ["فتح الأندلس", "فتح القسطنطينية", "سقوط بغداد", "معركة حطين"], "answer": "فتح القسطنطينية", "fact": "فتح القسطنطينية سنة 1453م غيّر ميزان القوى في المنطقة."}]}, {"name": "🎬 أفلام", "short": "أفلام", "qs": [{"value": 100, "type": "mcq", "q": "فيلم Titanic يدور حول أي نوع من وسائل النقل؟", "options": ["قطار", "سفينة", "طائرة", "غواصة"], "answer": "سفينة", "fact": "الفيلم مستوحى من كارثة سفينة تايتانيك عام 1912."}, {"value": 200, "type": "mcq", "q": "من أخرج فيلم Inception؟", "options": ["جيمس كاميرون", "كريستوفر نولان", "ستيفن سبيلبرغ", "دينيس فيلنوف"], "answer": "كريستوفر نولان", "fact": "صدر Inception عام 2010 من إخراج كريستوفر نولان."}, {"value": 300, "type": "truefalse", "q": "فيلم The Godfather صدر قبل فيلم Jaws.", "answer": "صح", "fact": "The Godfather صدر 1972 وJaws صدر 1975."}, {"value": 400, "type": "audio", "q": "اسمع الوصف وحدد الفيلم.", "audioText": "فيلم خيال علمي تدور فكرته حول الأحلام داخل الأحلام، وبطله متخصص في استخراج الأسرار من العقل.", "options": ["Interstellar", "Inception", "Arrival", "Tenet"], "answer": "Inception", "fact": "المستويات المتداخلة من الأحلام هي محور Inception."}, {"value": 500, "type": "mcq", "q": "أي فيلم فاز بأوسكار أفضل فيلم وهو من إخراج بونغ جون هو؟", "options": ["Oldboy", "Parasite", "Train to Busan", "Decision to Leave"], "answer": "Parasite", "fact": "Parasite فاز بأوسكار أفضل فيلم عن حفل 2020."}]}, {"name": "🎭 مسرحيات كويتية", "short": "مسرحيات", "qs": [{"value": 100, "type": "mcq", "q": "أي فنان ارتبط اسمه بقوة بمسرحية «باي باي لندن»؟", "options": ["عبدالحسين عبدالرضا", "داود حسين", "طارق العلي", "حسن البلام"], "answer": "عبدالحسين عبدالرضا", "fact": "«باي باي لندن» من أشهر الأعمال المسرحية لعبدالحسين عبدالرضا."}, {"value": 200, "type": "mcq", "q": "مسرحية «سيف العرب» ارتبطت بأحداث أي فترة؟", "options": ["الغزو العراقي للكويت", "الحرب العالمية الأولى", "أزمة النفط 1973", "حرب أكتوبر"], "answer": "الغزو العراقي للكويت", "fact": "المسرحية تناولت الغزو العراقي للكويت بصورة ساخرة وسياسية."}, {"value": 300, "type": "truefalse", "q": "«باي باي لندن» مسرحية كويتية وليست مسلسلاً تلفزيونياً.", "answer": "صح", "fact": "هي عمل مسرحي كويتي شهير."}, {"value": 400, "type": "audio", "q": "اسمع الوصف وحدد المسرحية.", "audioText": "مسرحية كويتية شهيرة تدور حول سفر مجموعة كويتية إلى بريطانيا، واسمها يودع العاصمة البريطانية.", "options": ["سيف العرب", "باي باي لندن", "هذا سيفوه", "فرسان المناخ"], "answer": "باي باي لندن", "fact": "اسمها نفسه يشير إلى لندن بصورة مباشرة."}, {"value": 500, "type": "mcq", "q": "من الكاتب المسرحي الكويتي المعروف بأعمال اجتماعية وسياسية بارزة مثل «حامي الديار» و«ممثل الشعب»؟", "options": ["عبدالعزيز المسلم", "سعد الفرج", "منصور المنصور", "غانم الصالح"], "answer": "عبدالعزيز المسلم", "fact": "عبدالعزيز المسلم من أبرز كتاب ومنتجي المسرح الجماهيري في الكويت."}]}, {"name": "📺 مسلسلات كويتية", "short": "مسلسلات", "qs": [{"value": 100, "type": "mcq", "q": "«درب الزلق» يُصنف شنو؟", "options": ["مسلسل كويتي", "فيلم مصري", "مسرحية بحرينية", "برنامج مسابقات"], "answer": "مسلسل كويتي", "fact": "درب الزلق من أشهر كلاسيكيات الدراما الكويتية."}, {"value": 200, "type": "mcq", "q": "أي ثنائي ارتبط بقوة بمسلسل «درب الزلق»؟", "options": ["عبدالحسين عبدالرضا وسعد الفرج", "داود حسين وحسن البلام", "طارق العلي وأحمد العونان", "حياة الفهد وسعاد عبدالله"], "answer": "عبدالحسين عبدالرضا وسعد الفرج", "fact": "قدما شخصيتي حسين وسعد في العمل."}, {"value": 300, "type": "audio", "q": "اسمع التلميح وحدد المسلسل.", "audioText": "مسلسل كويتي كلاسيكي عن أخوين تتغير حياتهما بعد حصولهما على ثروة، واسمه مرتبط بطريق زلق.", "options": ["خالتي قماشة", "درب الزلق", "الأقدار", "رقية وسبيكة"], "answer": "درب الزلق", "fact": "الحبكة الساخرة حول الثروة المفاجئة من أشهر عناصر العمل."}, {"value": 400, "type": "mcq", "q": "أي مسلسل كويتي كلاسيكي يحمل اسم شخصيتين نسائيتين في عنوانه؟", "options": ["الأقدار", "رقية وسبيكة", "درب الزلق", "إلى أبي وأمي مع التحية"], "answer": "رقية وسبيكة", "fact": "العنوان يجمع اسمي الشخصيتين الرئيسيتين."}, {"value": 500, "type": "truefalse", "q": "«خالتي قماشة» من كلاسيكيات الدراما الكويتية في الثمانينيات.", "answer": "صح", "fact": "عُرض المسلسل في الثمانينيات وأصبح من الأعمال الكويتية المعروفة."}]}, {"name": "🎙️ إعلام", "short": "إعلام", "qs": [{"value": 100, "type": "mcq", "q": "شنو اسم المجلة الثقافية الكويتية المعروفة التي تأسست سنة 1958؟", "options": ["العربي", "النهضة", "الكويت اليوم", "القبس"], "answer": "العربي", "fact": "مجلة العربي الكويتية تأسست عام 1958."}, {"value": 200, "type": "mcq", "q": "شنو الاختصار الشائع لتلفزيون دولة الكويت بالإنجليزية؟", "options": ["KTV", "KWT", "KBC", "KMT"], "answer": "KTV", "fact": "يستخدم KTV اختصاراً لقنوات تلفزيون الكويت."}, {"value": 300, "type": "audio", "q": "اسمع العبارة وحدد المجال الإعلامي الأقرب.", "audioText": "ننتقل الآن إلى مراسلنا في موقع الحدث للحصول على آخر التفاصيل.", "options": ["نشرة أخبار", "برنامج طبخ", "مسلسل", "وثائقي حيوانات"], "answer": "نشرة أخبار", "fact": "الإحالة إلى مراسل ميداني من أساليب التغطية الإخبارية."}, {"value": 400, "type": "truefalse", "q": "الخبر العاجل يختلف عن التقرير التحليلي في أنه يركز أولاً على المعلومة الجديدة بسرعة.", "answer": "صح", "fact": "الخبر العاجل يعطي الأولوية للتحديث الفوري قبل التحليل الموسع."}, {"value": 500, "type": "mcq", "q": "أي عنصر يساعد أكثر على التحقق من خبر متداول؟", "options": ["عدد الإعجابات", "مصدر أولي موثوق", "كثرة إعادة الإرسال", "عنوان مثير"], "answer": "مصدر أولي موثوق", "fact": "العودة للمصدر الأصلي والموثوق أهم من مؤشرات الانتشار."}]}, {"name": "🕌 ديني", "short": "ديني", "qs": [{"value": 100, "type": "mcq", "q": "كم عدد أركان الإسلام؟", "options": ["4", "5", "6", "7"], "answer": "5", "fact": "الشهادتان، الصلاة، الزكاة، الصوم، الحج لمن استطاع."}, {"value": 200, "type": "mcq", "q": "كم عدد الصلوات المفروضة في اليوم والليلة؟", "options": ["3", "4", "5", "6"], "answer": "5", "fact": "الصلوات المفروضة خمس."}, {"value": 300, "type": "truefalse", "q": "الزكاة ركن من أركان الإسلام.", "answer": "صح", "fact": "الزكاة أحد أركان الإسلام الخمسة."}, {"value": 400, "type": "mcq", "q": "أي شهر يصومه المسلمون فرضاً؟", "options": ["شعبان", "رمضان", "شوال", "ذو القعدة"], "answer": "رمضان", "fact": "صيام رمضان فرض على المسلم القادر المستوفي للشروط."}, {"value": 500, "type": "mcq", "q": "إلى أي جهة يتوجه المسلمون في الصلاة؟", "options": ["المسجد النبوي", "المسجد الأقصى", "الكعبة", "جبل عرفات"], "answer": "الكعبة", "fact": "قبلة المسلمين هي الكعبة المشرفة في مكة."}]}, {"name": "🌙 الأنبياء", "short": "الأنبياء", "qs": [{"value": 100, "type": "mcq", "q": "من هو النبي الذي ابتلعه الحوت؟", "options": ["يونس", "يوسف", "أيوب", "هود"], "answer": "يونس", "fact": "قصة يونس عليه السلام والحوت مذكورة في القرآن."}, {"value": 200, "type": "mcq", "q": "من هو النبي الذي أُلقي في النار فنجاه الله؟", "options": ["إبراهيم", "موسى", "داود", "زكريا"], "answer": "إبراهيم", "fact": "قال الله للنار أن تكون برداً وسلاماً على إبراهيم."}, {"value": 300, "type": "mcq", "q": "من هو النبي الذي عُرف بتفسير الرؤى وقصته مع إخوته؟", "options": ["يوسف", "يحيى", "إدريس", "إسماعيل"], "answer": "يوسف", "fact": "سورة يوسف تسرد قصته بتفصيل."}, {"value": 400, "type": "audio", "q": "اسمع الوصف وحدد النبي.", "audioText": "نبي كلمه الله، وأُرسل إلى فرعون، وأيده الله بالعصا.", "options": ["عيسى", "موسى", "نوح", "صالح"], "answer": "موسى", "fact": "موسى عليه السلام أُرسل إلى فرعون وأيده الله بآيات."}, {"value": 500, "type": "mcq", "q": "من النبي الذي صنع السفينة بأمر الله؟", "options": ["نوح", "لوط", "شعيب", "هارون"], "answer": "نوح", "fact": "صنع نوح عليه السلام السفينة بأمر الله قبل الطوفان."}]}, {"name": "📖 القرآن", "short": "القرآن", "qs": [{"value": 100, "type": "mcq", "q": "ما أول سورة في ترتيب المصحف؟", "options": ["البقرة", "الفاتحة", "الناس", "الإخلاص"], "answer": "الفاتحة", "fact": "سورة الفاتحة هي أول سور المصحف ترتيباً."}, {"value": 200, "type": "mcq", "q": "ما أطول سورة في القرآن؟", "options": ["آل عمران", "البقرة", "النساء", "المائدة"], "answer": "البقرة", "fact": "سورة البقرة هي أطول سور القرآن."}, {"value": 300, "type": "truefalse", "q": "سورة الإخلاص عدد آياتها أربع.", "answer": "صح", "fact": "سورة الإخلاص تتكون من أربع آيات."}, {"value": 400, "type": "mcq", "q": "أي سورة سُمّيت باسم امرأة؟", "options": ["مريم", "النساء", "المجادلة", "الممتحنة"], "answer": "مريم", "fact": "سورة مريم سميت باسم مريم عليها السلام."}, {"value": 500, "type": "mcq", "q": "في أي سورة توجد آية الكرسي؟", "options": ["البقرة", "آل عمران", "النساء", "المائدة"], "answer": "البقرة", "fact": "آية الكرسي هي الآية 255 من سورة البقرة."}]}, {"name": "🌍 جغرافيا", "short": "جغرافيا", "qs": [{"value": 100, "type": "image", "q": "أي دولة يمثل هذا العلم؟", "visual": "kuwaitFlag", "options": ["الكويت", "الأردن", "الإمارات", "السودان"], "answer": "الكويت", "fact": "العلم الكويتي يتكون من الأخضر والأبيض والأحمر مع شبه منحرف أسود."}, {"value": 200, "type": "mcq", "q": "شنو عاصمة اليابان؟", "options": ["أوساكا", "طوكيو", "كيوتو", "سابورو"], "answer": "طوكيو", "fact": "طوكيو هي عاصمة اليابان وأكبر مناطقها الحضرية."}, {"value": 300, "type": "mcq", "q": "أي مضيق يفصل إسبانيا عن المغرب؟", "options": ["باب المندب", "هرمز", "جبل طارق", "البوسفور"], "answer": "جبل طارق", "fact": "مضيق جبل طارق يربط الأطلسي بالبحر المتوسط."}, {"value": 400, "type": "truefalse", "q": "نهر النيل يصب في البحر المتوسط.", "answer": "صح", "fact": "يشكل النيل دلتا كبيرة قبل مصبه في البحر المتوسط."}, {"value": 500, "type": "audio", "q": "اسمع الوصف وحدد الدولة.", "audioText": "دولة تمتد عبر قارتي أوروبا وآسيا، وتعد الأكبر في العالم من حيث المساحة.", "options": ["كندا", "الصين", "روسيا", "الولايات المتحدة"], "answer": "روسيا", "fact": "روسيا أكبر دولة في العالم من حيث المساحة."}]}, {"name": "🧠 ألغاز وذكاء", "short": "ألغاز", "qs": [{"value": 100, "type": "mcq", "q": "شيء كلما أخذت منه كبر، شنو هو؟", "options": ["الحفرة", "العمر", "الماء", "الظل"], "answer": "الحفرة", "fact": "كلما أزلت التراب من الحفرة كبرت."}, {"value": 200, "type": "mcq", "q": "إذا عندك 3 تفاحات وأخذت منهم تفاحتين، جم تفاحة صارت معاك؟", "options": ["1", "2", "3", "5"], "answer": "2", "fact": "أنت أخذت تفاحتين، لذلك معك تفاحتان."}, {"value": 300, "type": "mcq", "q": "أب وأم عندهم 6 أبناء، ولكل ابن أخت واحدة. كم عدد أفراد الأسرة؟", "options": ["8", "9", "10", "14"], "answer": "9", "fact": "الأب والأم + 6 أبناء + أخت واحدة مشتركة = 9."}, {"value": 400, "type": "truefalse", "q": "إذا تجاوزت صاحب المركز الثاني في سباق، تصبح في المركز الأول.", "answer": "خطأ", "fact": "إذا تجاوزت الثاني فأنت تأخذ مكانه وتصبح ثانياً."}, {"value": 500, "type": "audio", "q": "اسمع اللغز وحدد الإجابة.", "audioText": "له أسنان ولا يعض، ويمر على الشعر كل يوم. ما هو؟", "options": ["المشط", "المفتاح", "المنشار", "الفرشاة"], "answer": "المشط", "fact": "أسنان المشط لا تعض، وإنما ترتب الشعر."}]}];
+const STORAGE='tahaddi-yamma-v2-state';
+const app=document.getElementById('app');
+let state=null, tick=null, selectedOption=null, removedOptions=[];
+let draft={count:2,names:['الفريق الأول','الفريق الثاني','الفريق الثالث','الفريق الرابع'],duration:45,stealDuration:15};
+function esc(s){return String(s).replace(/[&<>"']/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c]))}
+function save(){try{localStorage.setItem(STORAGE,JSON.stringify(state))}catch(e){}}
+function load(){try{const s=JSON.parse(localStorage.getItem(STORAGE));if(s&&s.version===2)state=s}catch(e){state=null}}
+function beep(kind='ok'){
+ const A=window.AudioContext||window.webkitAudioContext;if(!A)return;const ac=new A(),o=ac.createOscillator(),g=ac.createGain();
+ o.connect(g);g.connect(ac.destination);o.type='sine';o.frequency.value=kind==='bad'?180:kind==='warn'?420:620;g.gain.value=.06;o.start();o.stop(ac.currentTime+.12);
+}
+function speak(text){if(!('speechSynthesis' in window)){toast('الصوت غير مدعوم على هذا المتصفح');return} speechSynthesis.cancel(); const u=new SpeechSynthesisUtterance(text);u.lang='ar-KW';u.rate=.9;speechSynthesis.speak(u)}
+function toast(t){const d=document.createElement('div');d.className='toast';d.textContent=t;document.body.appendChild(d);setTimeout(()=>d.remove(),1800)}
+function header(){return `<div class="top"><div class="brand">✦ تحدّي اليمعة V2</div><div class="badge">نسخة تجريبية قابلة للعب</div></div>`}
+function total(){return CATEGORIES.reduce((n,c)=>n+c.qs.length,0)}
+function render(){clearInterval(tick);selectedOption=null;removedOptions=[];if(!state) return setup();if(state.current)return question();return board()}
+function setup(){
+ app.innerHTML=header()+`<section class="hero"><div class="badge">ديوانية • فرق • صور • صوت • سرقة</div><h1>منو <span>يسيطر</span> على اليمعة؟</h1><p class="sub">12 فئة • 60 سؤال • 3 مساعدات لكل فريق • وقت حي يتحرك ثانية بثانية</p></section>
+ <section class="panel"><h2>جهّز الفرق</h2><div class="grid2">
+ <div class="field"><label>عدد الفرق</label><select id="count"><option value="2">فريقان</option><option value="3">3 فرق</option><option value="4">4 فرق</option></select></div>
+ <div class="field"><label>وقت السؤال</label><select id="dur"><option value="30">30 ثانية</option><option value="45">45 ثانية</option><option value="60">60 ثانية</option></select></div>
+ </div><div id="names" class="grid2" style="margin-top:12px"></div>
+ <div class="actions"><button class="btn wide" id="start">ابدأ V2 ←</button></div>
+ <p class="small">المساعدات: 🕳️ حفرة • 💣 قنبلة • ⚡ دبل. إذا الفريق أخطأ تنتقل فرصة السرقة للفريق التالي لمدة 15 ثانية.</p></section>`;
+ document.getElementById('count').value=draft.count;document.getElementById('dur').value=draft.duration;
+ const names=document.getElementById('names');
+ function drawNames(){names.innerHTML=draft.names.slice(0,draft.count).map((n,i)=>`<div class="field"><label>اسم الفريق ${i+1}</label><input id="n${i}" maxlength="20" value="${esc(n)}"></div>`).join('');
+ draft.names.slice(0,draft.count).forEach((_,i)=>document.getElementById('n'+i).oninput=e=>draft.names[i]=e.target.value);}
+ document.getElementById('count').onchange=e=>{draft.count=+e.target.value;drawNames()};document.getElementById('dur').onchange=e=>draft.duration=+e.target.value;drawNames();
+ document.getElementById('start').onclick=()=>{state={version:2,teams:draft.names.slice(0,draft.count).map((n,i)=>({name:n.trim()||`الفريق ${i+1}`,score:0,helps:{pit:false,bomb:false,double:false}})),duration:draft.duration,stealDuration:15,used:[],turn:0,current:null};save();render()};
+}
+function scoreHTML(){
+ return `<div class="scoreboard">${state.teams.map((t,i)=>`<div class="team ${i===state.turn?'active':''}"><div class="name">${esc(t.name)} ${i===state.turn?'👈':''}</div><div class="score">${t.score}</div><div class="assists"><span class="assist-chip ${t.helps.pit?'used':''}">🕳️ حفرة</span><span class="assist-chip ${t.helps.bomb?'used':''}">💣 قنبلة</span><span class="assist-chip ${t.helps.double?'used':''}">⚡ دبل</span></div></div>`).join('')}</div>`
+}
+function board(){
+ const done=state.used.length,max=total(),over=done>=max;
+ let grid=CATEGORIES.map(c=>`<div class="cat">${c.name}</div>`).join('');
+ for(let row=0;row<5;row++)for(let c=0;c<CATEGORIES.length;c++){const id=`${c}-${row}`,used=state.used.includes(id);grid+=`<button class="tile ${used?'used':''}" ${used?'disabled':''} data-id="${id}">${used?'✓':CATEGORIES[c].qs[row].value}</button>`}
+ let end='';
+ if(over){const order=[...state.teams].sort((a,b)=>b.score-a.score),top=order[0].score,w=order.filter(x=>x.score===top);end=`<section class="panel result"><div class="cup">🏆</div><h2>${w.length===1?'الفائز: '+esc(w[0].name):'تعادل: '+w.map(x=>esc(x.name)).join(' و ')}</h2>${order.map(x=>`<div class="notice" style="margin-top:8px">${esc(x.name)} — <strong>${x.score}</strong></div>`).join('')}</section>`}
+ app.innerHTML=header()+`<div class="qhead"><h2>لوحة التحدّي</h2><div class="badge">${done} / ${max}</div></div>${scoreHTML()}<section class="panel">
+ <div class="qhead"><strong>${over?'خلصت الجولة':'الدور على: '+esc(state.teams[state.turn].name)}</strong><span class="small">اختاروا الفئة والنقاط</span></div>
+ <div class="progress"><span style="width:${done/max*100}%"></span></div><div class="board-wrap"><div class="board">${grid}</div></div></section>${end}
+ <div class="actions"><button class="btn ghost" id="reset">لعبة جديدة</button></div>`;
+ document.querySelectorAll('[data-id]').forEach(b=>b.onclick=()=>openQ(b.dataset.id));
+ document.getElementById('reset').onclick=()=>{if(confirm('تبدأ لعبة جديدة وتمسح الجولة الحالية؟')){state=null;save();render()}};
+}
+function openQ(id){
+ if(state.used.includes(id)||state.current)return;const [c,r]=id.split('-').map(Number),q=CATEGORIES[c].qs[r];
+ state.current={id,c,r,phase:'main',team:state.turn,end:Date.now()+state.duration*1000,revealed:false,double:false,bombed:false};
+ save();render();
+}
+function visualSVG(kind){
+ if(kind==='pitch')return `<svg viewBox="0 0 500 260" aria-label="رسم ملعب كرة قدم"><rect x="10" y="10" width="480" height="240" rx="8" fill="#1f6b45" stroke="#fff" stroke-width="4"/><line x1="250" y1="10" x2="250" y2="250" stroke="#fff" stroke-width="3"/><circle cx="250" cy="130" r="52" fill="none" stroke="#fff" stroke-width="3"/><circle cx="250" cy="130" r="4" fill="#fff"/><rect x="10" y="72" width="70" height="116" fill="none" stroke="#fff" stroke-width="3"/><rect x="420" y="72" width="70" height="116" fill="none" stroke="#fff" stroke-width="3"/></svg>`;
+ if(kind==='kuwaitFlag')return `<svg viewBox="0 0 520 300" aria-label="علم الكويت"><rect width="520" height="100" y="0" fill="#007A3D"/><rect width="520" height="100" y="100" fill="#fff"/><rect width="520" height="100" y="200" fill="#CE1126"/><polygon points="0,0 130,80 130,220 0,300" fill="#000"/></svg>`;
+ return '';
+}
+function getQ(){const x=state.current;return CATEGORIES[x.c].qs[x.r]}
+function remaining(){return Math.max(0,Math.ceil((state.current.end-Date.now())/1000))}
+function question(){
+ const cur=state.current,q=getQ(),team=state.teams[cur.team],left=remaining();
+ const opts=q.type==='truefalse'?['صح','خطأ']:(q.options||[]);
+ const optHTML=opts.length?`<div class="options" id="opts">${opts.map((o,i)=>`<button class="option" data-opt="${esc(o)}" data-idx="${i}">${esc(o)}</button>`).join('')}</div>`:'';
+ const media=q.type==='image'?`<div class="visual">${visualSVG(q.visual)}</div>`:q.type==='audio'?`<div class="visual"><button class="btn secondary" id="playaudio">▶️ شغّل التلميح الصوتي</button></div>`:'';
+ const phaseLabel=cur.phase==='steal'?`🔥 سرقة — ${esc(team.name)}`:`الدور على: ${esc(team.name)}`;
+ app.innerHTML=header()+`<section class="qwrap"><div class="panel"><div class="qhead"><div><span class="badge">${CATEGORIES[cur.c].name}</span> <span class="badge">${q.value} نقطة</span></div><div class="timer ${left<=10?'danger':''}" id="timer">⏱ <span id="sec">${left}</span></div></div>
+ <p class="sub" style="margin-top:12px">${phaseLabel}</p><div class="qtext">${esc(q.q)}</div>${media}${optHTML}
+ <div id="feedback"></div>
+ <div class="helpbar">${cur.phase==='main'?`<button class="helpbtn ${team.helps.pit?'used':''}" id="pit" ${team.helps.pit?'disabled':''}>🕳️ حفرة</button><button class="helpbtn ${team.helps.bomb?'used':''}" id="bomb" ${team.helps.bomb?'disabled':''}>💣 قنبلة</button><button class="helpbtn ${team.helps.double?'used':''}" id="double" ${team.helps.double?'disabled':''}>⚡ دبل</button>`:''}</div>
+ <div class="actions"><button class="btn secondary" id="reveal">اكشف الإجابة</button><button class="btn ghost" id="back">رجوع بدون استخدام</button></div>
+ <div id="judge"></div></div></section>`;
+ if(q.type==='audio')document.getElementById('playaudio').onclick=()=>speak(q.audioText);
+ document.querySelectorAll('[data-opt]').forEach(b=>b.onclick=()=>{document.querySelectorAll('.option').forEach(x=>x.classList.remove('selected'));b.classList.add('selected');selectedOption=b.dataset.opt});
+ document.getElementById('reveal').onclick=reveal;
+ document.getElementById('back').onclick=()=>{if(cur.phase==='main'){state.current=null;save();render()}else toast('أكمل فرصة السرقة أو انتهِ السؤال')};
+ if(cur.phase==='main'){
+   document.getElementById('pit').onclick=usePit;document.getElementById('bomb').onclick=useBomb;document.getElementById('double').onclick=useDouble;
+ }
+ tick=setInterval(()=>{if(!state||!state.current){clearInterval(tick);return}const r=remaining(),s=document.getElementById('sec'),t=document.getElementById('timer');if(s)s.textContent=r;if(t)t.classList.toggle('danger',r<=10);if(r===5)beep('warn');if(r===0){clearInterval(tick);timeUp()}},250);
+}
+function usePit(){
+ const cur=state.current,q=getQ(),team=state.teams[cur.team];if(team.helps.pit)return;team.helps.pit=true;
+ const opts=q.type==='truefalse'?['صح','خطأ']:(q.options||[]);
+ if(opts.length>=4){const wrong=opts.map((o,i)=>({o,i})).filter(x=>x.o!==q.answer).slice(0,2);wrong.forEach(x=>{const b=document.querySelector(`[data-idx="${x.i}"]`);if(b)b.classList.add('hidden-option')});toast('الحفرة شالت خيارين غلط 🕳️')}
+ else{toast('الحفرة عطتك تلميح قوي: الإجابة مو عشوائية 😄')}
+ save();document.getElementById('pit').classList.add('used');document.getElementById('pit').disabled=true;
+}
+function useBomb(){
+ const cur=state.current,team=state.teams[cur.team];if(team.helps.bomb)return;team.helps.bomb=true;
+ if(!state.used.includes(cur.id))state.used.push(cur.id);state.current=null;save();beep('bad');toast('💣 انلغى السؤال — اختار خانة ثانية');setTimeout(render,350);
+}
+function useDouble(){
+ const cur=state.current,team=state.teams[cur.team];if(team.helps.double)return;team.helps.double=true;cur.double=true;save();beep();toast('⚡ الدبل مفعّل: ربح ×2، والخطأ يخصم قيمة السؤال');document.getElementById('double').classList.add('used');document.getElementById('double').disabled=true;
+}
+function reveal(){
+ clearInterval(tick);
+ const cur=state.current,q=getQ();cur.revealed=true;save();const f=document.getElementById('feedback');
+ f.innerHTML=`<div class="answer"><div class="small">الإجابة الصحيحة</div><strong>${esc(q.answer)}</strong><div class="fact">${esc(q.fact)}</div></div>`;
+ const j=document.getElementById('judge');j.innerHTML=`<div class="actions"><button class="btn good" id="yes">✅ جاوب صح</button><button class="btn bad" id="no">❌ جاوب غلط</button></div>`;
+ document.getElementById('yes').onclick=()=>resolve(true);document.getElementById('no').onclick=()=>resolve(false);
+}
+function timeUp(){
+ if(!state||!state.current)return;beep('bad');toast('⏰ انتهى الوقت');
+ const cur=state.current,q=getQ(),f=document.getElementById('feedback');
+ if(f)f.innerHTML=`<div class="answer"><div class="small">انتهى الوقت — الإجابة الصحيحة</div><strong>${esc(q.answer)}</strong><div class="fact">${esc(q.fact)}</div></div>`;
+ setTimeout(()=>{if(state&&state.current&&state.current.id===cur.id)resolve(false)},700);
+}
+function resolve(ok){
+ const cur=state.current,q=getQ(),team=state.teams[cur.team];
+ if(ok){team.score+=q.value*(cur.double?2:1);beep();finishQuestion();return}
+ if(cur.phase==='main'&&cur.double)team.score-=q.value;
+ if(cur.phase==='main'&&state.teams.length>1){const next=(cur.team+1)%state.teams.length;cur.phase='steal';cur.team=next;cur.double=false;cur.end=Date.now()+state.stealDuration*1000;cur.revealed=false;save();beep('warn');render();toast('🔥 فرصة سرقة!')}
+ else{beep('bad');finishQuestion()}
+}
+function finishQuestion(){
+ const cur=state.current;if(!state.used.includes(cur.id))state.used.push(cur.id);state.turn=(state.turn+1)%state.teams.length;state.current=null;save();setTimeout(render,180);
+}
+load();render();
+if('serviceWorker' in navigator && location.protocol==='https:'){window.addEventListener('load',()=>navigator.serviceWorker.register('./sw.js').catch(()=>{}));}
+</script>
+</body>
+</html>
